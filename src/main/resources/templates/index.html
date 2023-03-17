@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <!-- xmlns:th= porque es thymeleaf ... ya no porque agregue la capa de seguridad a esta plantilla-->
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+
+                <style>
+                    header{
+                        background-color: darkslategrey;
+                        color: #fff;
+                        padding: 20px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    
+                    header h1{
+                        margin: 0;
+                        font-size: 32px;
+                    }
+                    
+                    table{
+                        margin-top: 10px;
+                        border-collapse: collapse; 
+                        width: 80%;
+                        margin-bottom: 20px;
+                    }
+                    th{ /*para darle estilo al encabezado de la tabla*/
+                        background-color: darkslategrey;
+                        color: #fff;
+                        font-size: 15px;
+                        font-weight: bold;
+                        padding: 10px;
+                        text-align: center;
+                        border: 1px solid #fff
+                    }
+                    td{/*para darle estilo a la informacion de la tabla*/
+                        text-align: center;
+                        padding: 10px;
+                        border: 1px solid #fff
+                    }
+                    footer{
+                        background-color: darkslategrey;
+                        color: #fff;
+                        padding: 10px;
+                        text-align: center;
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;/*contenido centrado*/
+                        align-items: center;
+                    }
+                    footer p{/*estilo del footer de plantilla*/
+                        margin: 0;
+                        font-size: 14px;
+                    }
+                    a{
+                        display: inline-block;
+                        padding: 0.5 em 1em;
+                        background-color: darkseagreen;
+                        color: white;/*color del texto*/
+                        text-align: center;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        box-shadow: 0px 1px 1px rgba(0,0,0,0.2); 
+                   
+                    }
+                    a:hover{
+                        background-color: activeborder;
+                        cursor: pointer;
+                    }
+                    
+                </style>
+
+    </head>
+    <body>
+        <header th:replace="plantilla/plantilla :: header"></header>
+        
+        <h1>Inicio</h1>
+        <br/>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}">Crear Persona</a>
+
+        <br>
+        <div th:if="${listaPersonas != null and !listaPersonas.empty}">
+
+            <table border="1">
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">Opcón editar</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">Opción eliminar</th>
+                </tr>
+
+                <tr th:each="persona: ${listaPersonas}">
+                    <td th:text="${persona.nombre}">Mostrar nombre</td>
+                    <td th:text="${persona.apellido}">Mostrar apellido</td>
+                    <td th:text="${persona.email}">Mostrar email</td>
+                    <td th:text="${persona.telefono}">Mostrar telefono</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/} + ${persona.idPersona}" th:text="Editar"></a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar(idPersona=${persona.idPersona})}" th:text="Eliminar"></a></td>
+                </tr>
+            </table> 
+        </div>
+
+        <div th:if="${listaPersonas == null or listaPersonas.empty}">
+            la lista está vacía
+        </div>
+        <footer th:replace="plantilla/plantilla :: footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8"/>
+        <style>
+            body {
+                background-color: #f2f2f2;
+                font-family: Arial, sans-serif;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-top: 50px;
+            }
+            form {
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                padding: 20px;
+                margin: 0 auto;
+                width: 400px;
+            }
+            label {
+                display: block;
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            input[type="text"],
+            input[type="password"] {
+                border: none;
+                border-radius: 3px;
+                box-shadow: 0 0 5px rgba(0,0,0,0.1);
+                font-size: 16px;
+                margin-bottom: 20px;
+                padding: 10px;
+                width: 100%;
+            }
+            input[type="submit"] {
+                background-color: #333;
+                border: none;
+                border-radius: 3px;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 10px;
+                width: 100%;
+            }
+            input[type="submit"]:hover {
+                background-color: #666;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form method="POST" th:action="@{/login}">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username"/>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password"/>
+            <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>

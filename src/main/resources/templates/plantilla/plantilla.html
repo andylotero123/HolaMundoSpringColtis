@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <!-- xmlns:th= porque es thymeleaf ... ya no porque agregue la capa de seguridad a esta plantilla-->
+    <head>
+        <title>plantilla</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:fragment="header"> <!-- para encabezado -->
+            <h1>Mi primera app de SprintBoot</h1>
+        </header>
+        
+        <footer th:fragment="footer">  <!-- para pie de pagina -->
+            <form method="POST" th:action="@{/logout}"><!-- para cerrar sesión -->
+                <a href="#" onclick="this.parentNode.submit();">Cerrar Sesion</a>
+            </form>
+        </footer>
+    </body>
+</html>
